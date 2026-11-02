@@ -1,5 +1,6 @@
 
 
+
 name: Build CherryEssentials
 
 on:
@@ -15,9 +16,6 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Extract source ZIP
-        run: unzip -q CherryEssentials-26.3-source.zip
-
       - name: Setup Java 25
         uses: actions/setup-java@v4
         with:
@@ -30,12 +28,11 @@ jobs:
           gradle-version: '9.2.1'
 
       - name: Build plugin
-        working-directory: CherryEssentials-26.3
         run: gradle clean build
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: CherryEssentials-JAR
-          path: CherryEssentials-26.3/build/libs/CherryEssentials.jar
+          path: build/libs/CherryEssentials.jar
           if-no-files-found: error
